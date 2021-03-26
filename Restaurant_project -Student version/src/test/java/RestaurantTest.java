@@ -6,6 +6,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 import java.time.LocalTime;
+import java.util.List;
 
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -63,6 +64,19 @@ class RestaurantTest {
 
         assertThrows(itemNotFoundException.class,
                 ()->restaurant.removeFromMenu("French fries"));
+    }
+
+    @Test
+    public void when_no_items_selected_from_menu_should_return_0_as_the_total_order_value(){
+        int totalOrderValue = restaurant.totalOrderValue(restaurant.getSelectedItems());
+    }
+    @Test
+    public void when_one_or_more_items_selected_from_menu_should_return_the_total_order_value(){
+        restaurant.selectItems("Sweet corn soup");
+        restaurant.selectItems("Vegetable lasagne");
+        List<String> selectedItems = restaurant.getSelectedItems();
+        int totalOrderValue = restaurant.totalOrderValue(selectedItems);
+
     }
 
 }
