@@ -13,6 +13,8 @@ public class Restaurant {
     public LocalTime openingTime;
     public LocalTime closingTime;
     private List<Item> menu = new ArrayList<Item>();
+    private List<String> selectedItems = new ArrayList<>();
+    private int totalBillAmount;
 
     public Restaurant(String name, String location, LocalTime openingTime, LocalTime closingTime) {
         this.name = name;
@@ -62,6 +64,28 @@ public class Restaurant {
 
     public String getName() {
         return name;
+    }
+
+    public void selectItems(String itemName){ selectedItems.add(itemName); }
+
+    public List<String> getSelectedItems() {  return selectedItems; }
+
+    private int findPriceByItemName(String itemName){
+        for(Item item: menu) {
+            if(item.getName().equals(itemName))
+                return item.getPrice();
+        }
+        return 0;
+    }
+
+    public int totalOrderValue(List<String> addedItem) {
+        if (addedItem.size() > 0) {
+            for (String item : selectedItems) {
+                totalBillAmount = totalBillAmount + findPriceByItemName(item);
+            }
+            return totalBillAmount;
+        }
+        return 0;
     }
 
     @Override

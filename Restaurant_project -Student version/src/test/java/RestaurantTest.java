@@ -69,6 +69,7 @@ class RestaurantTest {
     @Test
     public void when_no_items_selected_from_menu_should_return_0_as_the_total_order_value(){
         int totalOrderValue = restaurant.totalOrderValue(restaurant.getSelectedItems());
+        assertEquals(0,totalOrderValue);
     }
     @Test
     public void when_one_or_more_items_selected_from_menu_should_return_the_total_order_value(){
@@ -76,7 +77,9 @@ class RestaurantTest {
         restaurant.selectItems("Vegetable lasagne");
         List<String> selectedItems = restaurant.getSelectedItems();
         int totalOrderValue = restaurant.totalOrderValue(selectedItems);
+        assertEquals(388,totalOrderValue);
 
     }
+
 
 }
